@@ -1,0 +1,63 @@
+/* --- Base / reset --- */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  display: flex;                 /* 1) body is a flex container */
+  flex-direction: column;        /* column: header, main, footer */
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* --- Page regions --- */
+header, footer {
+  padding: 1rem;
+  background: #0f172a;           /* slate-900 */
+  color: #fff;
+}
+main {
+  display: flex;                 /* 1) main is a flex container */
+  flex-direction: row;           /* row: article | aside */
+  flex: auto;                    /* 3) auto height/width, fills remaining space */
+  min-height: 0;                 /* allows children to scroll inside */
+}
+
+/* --- Content columns --- */
+article {
+  flex: 2;                       /* 4) takes 2/3 width */
+  padding: 1rem;
+  overflow-y: auto;              /* 5) vertical scroll */
+  background: #f8fafc;           /* slate-50 */
+}
+aside {
+  flex: 1;                       /* 4) takes 1/3 width */
+  padding: 1rem;
+  overflow-y: auto;              /* 5) vertical scroll */
+  background: #eef2ff;           /* indigo-50 */
+  border-left: 1px solid #e2e8f0;
+}
+
+/* --- Simple header nav with a “logo” slot --- */
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+header nav li a { color: inherit; text-decoration: none; }
+header nav li a:hover { text-decoration: underline; }
+
+/* Provided hint: make the logo bigger if you add a unicode symbol */
+.logo { font-size: 1.5rem; line-height: 1; }
+
+/* --- Optional cosmetic footer --- */
+footer { text-align: center; }
+
+/* --- Responsive “degrade nicely” behavior for smartphones ---
+   You said adding class="works_on_smartphone" to <body> should make the layout stack.
+   This keeps the overall Flexbox strategy but stacks article and aside vertically.
+*/
+body.works_on_smartphone main { flex-direction: column; }
+body.works_on_smartphone aside { border-left: 0; border-top: 1px solid #e2e8f0; }
